@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../db.sqlite"
+}
+
+model Board {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+  threads     Thread[]
+  createdAt   DateTime  @default(now())
+}
+
+model Thread {
+  id        Int       @id @default(autoincrement())
+  title     String
+  board     Board     @relation(fields: [boardId], references: [id])
+  boardId   Int
+  posts     Post[]
+  closed    Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  thread    Thread    @relation(fields: [threadId], references: [id])
+  threadId  Int
+  name      String    @default("名無しさん")
+  email     String?   // sage 判定など
+  body      String
+  createdAt DateTime  @default(now())
+  ipHash    String    // ID 用: 日付+IP+board salt ハッシュ
+  tripcode  String?   // オプショナルなトリップコード
+  imageUrl  String?   // 任意の画像添付URL
+}
