@@ -1,5 +1,6 @@
-// pages/index.tsx
+// pages/index.tsx 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { supabase } from '../lib/supabase'
 
 type Thread = {
@@ -34,6 +35,12 @@ export default function Home() {
       <p className="mb-4">ようこそ。ここから開発を始めましょう！</p>
 
       <h2 className="text-xl font-semibold mb-2">📋 スレッド一覧</h2>
+
+      {/* 🧵 投稿ボタンのリンクを追加！ */}
+      <Link href="/new-thread">
+        <a className="text-blue-600 hover:underline mb-4 block">+ スレッドを立てる</a>
+      </Link>
+
       <ul className="space-y-2">
         {threads.map((thread) => (
           <li key={thread.id} className="p-3 bg-gray-100 rounded shadow">
