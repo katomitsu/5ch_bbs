@@ -2,13 +2,14 @@
   "name": "anon-board",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev -H 0.0.0.0 -p 3001",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "seed": "tsx src/scripts/seed.ts"
-  },
+ "scripts": {
+   "dev": "next dev -H 0.0.0.0 -p 3001",
+   "build": "prisma generate && next build",
+   "start": "next start",
+   "lint": "next lint",
+   "seed": "tsx src/scripts/seed.ts"
+ },
+
   "dependencies": {
     "@prisma/client": "^6.7.0",
     "@radix-ui/react-avatar": "^1.1.7",
